@@ -1,0 +1,4 @@
+kafka/
+mongodb/
+
+.env*
