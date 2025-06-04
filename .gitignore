@@ -1,4 +1,4 @@
-kafka/
-mongodb/
+kafka_volume/
+mongodb_volume/
 
 .env*

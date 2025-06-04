@@ -6,14 +6,14 @@ services:
     ports:
       - 9092:9092
     volumes:
-      - ./kafka:/bitnami/kafka/data
+      - ./kafka_volume:/bitnami/kafka/data
     environment:
       KAFKA_ENABLE_KRAFT: yes
       KAFKA_CFG_PROCESS_ROLES: broker,controller
-      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_NODE_ID: ${LOCAL_KAFKA_NODE_ID}
       KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
-      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CFG_LISTENERS: ${LOCAL_KAFKA_LISTENERS}
+      KAFKA_CFG_ADVERTISED_LISTENERS: ${LOCAL_KAFKA_ADVERTISED_LISTENERS}
       KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
       ALLOW_PLAINTEXT_LISTENER: yes
   
@@ -23,7 +23,7 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${LOCAL_MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${LOCAL_MONGO_ROOT_PASSWORD}
     volumes:
-      - ./mongodb:/data/db
+      - ./mongodb_volume:/data/db
